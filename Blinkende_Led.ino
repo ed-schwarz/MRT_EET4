@@ -1,25 +1,28 @@
-int ein = 0;
+int einT = 0; //boolean fur Taster
+int einS = 0; //boolean fur Spannungsnulldurchgangs
 void setup () {
 //In i t i a l i s i e r t Pin 14 (LED1) a l s o u t p u t .
     pinMode(14, OUTPUT);
-    pinMode(15, INPUT); //Ein
-    pinMode(16, INPUT); //Aus
+    pinMode(0, INPUT); //Ein
+    pinMode(1, INPUT); //Aus
+    pinMode(6, INPUT); //Spannungsnulldurchgangs
 }
 // LED1 b l i n k t im Zw e i s e k u n d e n t a k t
 void loop () {
     if(digitalRead(15) == HIGH){
-        ein = 1;
+        einT = 1;
     }
     if(digitalRead(16) == HIGH){
-        ein = 0;
+        einT = 0;
     }
-    if(ein == 1){
-        digitalWrite(14, HIGH ); // LED1 an
-        delay(1000); // 1000 ms war ten
+    if(digitalRead(16) == HIGH){
+        if(einT == 1){
+            digitalWrite(14, HIGH ); // LED1 an
+        }
+        else{
+            digitalWrite(14, LOW); // LED1 aus
+        }
     }
-    else{
-        digitalWrite(14, LOW); // LED1 aus
-        delay(1000); // 1000 ms war ten
-    }
+    
     
 }
