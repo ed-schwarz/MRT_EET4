@@ -3,14 +3,15 @@ int einS = 0; //boolean fur Spannungsnulldurchgangs
 double winkel = 0; 
 double Period;
 void setup () {
-//In i t i a l i s i e r t Pin 14 (LED1) a l s o u t p u t .
+//Initialisiert Pin 14 (LED1) als output.
     pinMode(14, OUTPUT); //LED1
     pinMode(0, INPUT); //Ein
     pinMode(1, INPUT); //Aus
     pinMode(6, INPUT); //Spannungsnulldurchgangs
     pinMode(3, OUTPUT); //Triac
+    pinMode(9, INPUT); //Interrupt
 }
-// LED1 b l i n k t im Zw e i s e k u n d e n t a k t
+// LED1 blinkt im Zweisekundentakt
 void loop () {
     if(digitalRead(0) == HIGH){ //Taster 1
         einT = 1;
