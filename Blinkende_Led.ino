@@ -1,5 +1,5 @@
 int einT = 0; //boolean fur Taster
-int einS = 0; //boolean fur Spannungsnulldurchgangs
+volatile byte einS = LOW; //boolean fur Spannungsnulldurchgangs
 double winkel = 0; 
 double Period;
 void setup () {
@@ -10,6 +10,7 @@ void setup () {
     pinMode(6, INPUT); //Spannungsnulldurchgangs
     pinMode(3, OUTPUT); //Triac
     pinMode(9, INPUT); //Interrupt
+    attachInterrupt(digitalPinToInterrupt(9), nulldurchgang, CHANGE);
 }
 // LED1 blinkt im Zweisekundentakt
 void loop () {
@@ -25,12 +26,15 @@ void loop () {
             winkel -= 1;
         }
     }
-    if(digitalRead(16) == HIGH){
+    if(einS == HIGH){
         digitalWrite(14, LOW); // LED1 aus
-        delay(0.00001*winkel);
+        delayMicroseconds(1*winkel);
         digitalWrite(3, HIGH); //Triac ein
     }
     else{
         digitalWrite(3, LOW); //Triac aus
     }
+}
+void nulldurchgang(){
+    einS = !einS;
 }
